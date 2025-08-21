@@ -227,11 +227,13 @@
         <!-- Down and Up buttons on the sides, Start and Reset together in the center, Exit at the end -->
         <button class="btn" id="downBtn" title="Down 10s">▼ −10s</button>
         <span style="display: flex; gap: 6px; align-items: center;">
-          <button class="btn" id="startBtn" title="Start / Pause">Start</button>
-          <button class="btn" id="resetBtn" title="Reset Timer">Reset</button>
+          <button class="btn" id="startBtn" title="Start / Pause" aria-label="Start or Pause Timer" role="button" tabindex="0">Start</button>
+          <button class="btn" id="resetBtn" title="Reset Timer" aria-label="Reset Timer" role="button" tabindex="0">Reset</button>
         </span>
         <button class="btn" id="exitBtn" title="Exit">Exit</button>
-        <button class="btn" id="upBtn" title="Up 10s">▲ +10s</button>
+  <button class="btn" id="upBtn" title="Up 10s" aria-label="Up 10 seconds" role="button" tabindex="0">▲ +10s</button>
+  <button class="btn" id="downBtn" title="Down 10s" aria-label="Down 10 seconds" role="button" tabindex="0">▼ −10s</button>
+  <button class="btn" id="exitBtn" title="Exit" aria-label="Exit" role="button" tabindex="0">Exit</button>
       </div>
     </main>
   </div>
@@ -402,11 +404,27 @@
   }
 
   // Button wiring
-  startBtn.addEventListener('click', toggleStart);
-  upBtn.addEventListener('click', () => setRemaining(remainingSeconds() + 10));
-  downBtn.addEventListener('click', () => setRemaining(remainingSeconds() - 10));
-  exitBtn.addEventListener('click', tryExit);
-  resetBtn.addEventListener('click', resetTimer);
+  // Helper to add both click and touchend for best compatibility
+  function addButtonHandler(btn, handler) {
+    // iOS Safari sometimes fires both touchend and click, so use a flag
+    let touchHandled = false;
+    btn.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      touchHandled = true;
+      handler();
+      setTimeout(() => { touchHandled = false; }, 350); // debounce
+    }, {passive: false});
+    btn.addEventListener('click', function(e) {
+      if (touchHandled) return;
+      handler();
+    });
+  }
+
+  addButtonHandler(startBtn, toggleStart);
+  addButtonHandler(upBtn, () => setRemaining(remainingSeconds() + 10));
+  addButtonHandler(downBtn, () => setRemaining(remainingSeconds() - 10));
+  addButtonHandler(exitBtn, tryExit);
+  addButtonHandler(resetBtn, resetTimer);
 
   // Keep correct after backgrounding (page may throttle timers)
   document.addEventListener('visibilitychange', () => {
