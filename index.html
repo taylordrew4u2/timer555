@@ -1,7 +1,5 @@
-# We'll construct the requested HTML from the previous answer and package it into a JSON file.
-import json, textwrap, os, pathlib
 
-html = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -339,18 +337,4 @@ html = """<!DOCTYPE html>
 </script>
 </body>
 </html>
-"""
-
-payload = {
-    "name": "TaylorDrewTimer",
-    "files": {
-        "index.html": html
-    }
-}
-
-out_path = "/mnt/data/taylor_timer.json"
-with open(out_path, "w", encoding="utf-8") as f:
-    json.dump(payload, f, ensure_ascii=False, indent=2)
-
-out_path
 
