@@ -245,6 +245,7 @@
             <div id="timer" aria-label="Countdown Timer">5:00</div>
             <div class="controls">
                 <button class="btn" id="downBtn" title="Down 10s" aria-label="Down 10 seconds" role="button" tabindex="0">▼ −10s</button>
+                <button class="btn" id="startBtn" title="Start / Pause" aria-label="Start or Pause Timer" role="button" tabindex="0">Start</button>
                 <button class="btn" id="resetBtn" title="Reset Timer" aria-label="Reset Timer" role="button" tabindex="0">Reset</button>
                 <button class="btn" id="exitBtn" title="Exit" aria-label="Exit" role="button" tabindex="0">Exit</button>
                 <button class="btn" id="upBtn" title="Up 10s" aria-label="Up 10 seconds" role="button" tabindex="0">▲ +10s</button>
@@ -286,7 +287,33 @@
             const downBtn = document.getElementById('downBtn');
             const exitBtn = document.getElementById('exitBtn');
             const resetBtn = document.getElementById('resetBtn');
+            const startBtn = document.getElementById('startBtn');
             const toastEl = document.getElementById('toast');
+
+            function start() {
+                if (document.body.classList.contains('solid')) return; // ignore during solid screen
+                if (!isRunning) {
+                    const startFrom = remainingSeconds();
+                    deadline = now() + startFrom * 1000;
+                    isRunning = true;
+                    startBtn.textContent = 'Pause';
+                }
+            }
+
+            function pause() {
+                if (isRunning) {
+                    pausedRemaining = remainingSeconds();
+                    isRunning = false;
+                    deadline = null;
+                    startBtn.textContent = 'Start';
+                }
+            }
+
+            function toggleStart() {
+                if (isRunning) pause();
+                else start();
+            }
+            addButtonHandler(startBtn, toggleStart);
 
             const SOLID_MS = 5000;
             let baseSeconds = 300; // default 5 minutes
