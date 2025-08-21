@@ -59,7 +59,15 @@
             justify-content: center;
             font-size: 20vw;           /* auto-size */
             user-select: none;
+            font-family: 'DS-Digital', 'Orbitron', 'Share Tech Mono', 'Courier New', Courier, monospace;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-shadow: 0 0 8px #fff, 0 0 2px #fff;
         }
+    <!-- Google Fonts for digital look -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <!-- Optional: DS-Digital font from CDN -->
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/ds-digital" />
 
         /* buttons */
         .controlBtn {
@@ -96,6 +104,7 @@
 
     <!-- controls -->
     <button id="startBtn" class="controlBtn">Start</button>
+    <button id="resetBtn" class="controlBtn">Reset</button>
     <button id="exitBtn"  class="controlBtn">Exit</button>
     <button id="upBtn"    class="controlBtn">▲</button>
     <button id="downBtn"  class="controlBtn">▼</button>
@@ -104,7 +113,18 @@
         (function () {
             const timerDisplay = document.getElementById("timerDisplay");
             const startBtn     = document.getElementById("startBtn");
+            const resetBtn     = document.getElementById("resetBtn");
             const exitBtn      = document.getElementById("exitBtn");
+            // Position the reset button (top left)
+            resetBtn.style.top = '2%';
+            resetBtn.style.left = '2%';
+            resetBtn.style.right = '';
+            resetBtn.style.bottom = '';
+            resetBtn.onclick = () => {
+                running = false;
+                reset();
+                startBtn.textContent = "Start";
+            };
             const upBtn        = document.getElementById("upBtn");
             const downBtn      = document.getElementById("downBtn");
             const body         = document.body;
