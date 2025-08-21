@@ -49,11 +49,15 @@
             100% { transform: translateX(-100%); }
         }
         #timerDisplay {
-            flex: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: calc(100vh - 7.5em); /* leave space for buttons */
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20vw;
+            font-size: 18vw;
             user-select: none;
             font-family: 'DS-Digital', 'Orbitron', 'Share Tech Mono', 'Courier New', Courier, monospace;
             font-weight: 900;
@@ -71,9 +75,9 @@
             z-index: 10;
         }
         .controlBtn {
-            background: #444;
+            background: transparent;
             color: #fff;
-            border: none;
+            border: 2px solid #fff;
             border-radius: 0.5em;
             min-width: 3.2em;
             min-height: 2.2em;
@@ -83,27 +87,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-            transition: background 0.2s, transform 0.1s;
+            box-shadow: none;
+            transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.1s;
             cursor: pointer;
             outline: none;
             font-family: inherit;
         }
         .controlBtn:active {
-            background: #222;
-            transform: scale(0.96);
-        }
-        .controlBtn[title="Start/Pause"] {
-            background: #ffb347;
-            color: #222;
-        }
-        .controlBtn[title="Reset"] {
-            background: #4bcaff;
-            color: #222;
-        }
-        .controlBtn[title="Exit"] {
-            background: #ff4b7d;
+            background: rgba(255,255,255,0.08);
             color: #fff;
+            border-color: #fff;
+            transform: scale(0.96);
         }
         .flashRed { animation: flash 1s step-start infinite; }
         @keyframes flash { 50% { background: var(--alert-color); } }
