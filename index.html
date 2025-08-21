@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <title>Full-Screen Countdown</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+    <!-- iOS/iPadOS Safari web app meta -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
     <!-- Google Fonts for digital look -->
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     <!-- Optional: DS-Digital font from CDN -->
@@ -50,10 +54,10 @@
         }
         #timerDisplay {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: env(safe-area-inset-top, 0);
+            left: env(safe-area-inset-left, 0);
             width: 100vw;
-            height: calc(100dvh - 7.5em);
+            height: calc((100dvh - 7.5em) - env(safe-area-inset-bottom, 0));
             display: flex;
             align-items: center;
             justify-content: center;
