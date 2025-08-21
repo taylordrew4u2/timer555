@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Taylor Drew Timer</title>
+  <style>
+    :root {
+      --bg: #000;
+      --fg: #fff;
+      --accent: #ff2b2b;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Share Tech Mono', 'Courier New', Courier, monospace;
+    }
+    #timer {
+      width: 100%;
+      text-align: center;
+      font-size: clamp(32px, 12vw, 10vh);
+      font-weight: bold;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      padding: 0.5em 0;
+      border-radius: 0.5em;
+      margin-bottom: 1vh;
+      letter-spacing: 0.08em;
+      text-shadow: 0 0 8px #fff, 0 0 2px #fff;
+      user-select: none;
+    }
+    #buttonRow {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 2vw;
+      margin-bottom: 2vh;
+    }
+    .controlBtn {
+      background: transparent;
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 0.5em;
+      min-width: 3.2em;
+      min-height: 2.2em;
+      font-size: 1em;
+      padding: 0.2em 0.7em;
+      margin: 0 0.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.1s;
+    }
+    .controlBtn:active {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border-color: #fff;
+      transform: scale(0.96);
+    }
+  </style>
+</head>
+<body>
+  <div id="timer">05:00</div>
+  <div id="buttonRow">
+    <button id="upBtn"    class="controlBtn" title="Add 10s">+10s</button>
+    <button id="startBtn" class="controlBtn" title="Start/Pause">Start/Pause</button>
+    <button id="resetBtn" class="controlBtn" title="Reset">Reset</button>
+    <button id="downBtn"  class="controlBtn" title="Subtract 10s">-10s</button>
+    <button id="exitBtn"  class="controlBtn" title="Exit">Exit</button>
+  </div>
+  <script>
+    const timerDisplay = document.getElementById('timer');
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const upBtn = document.getElementById('upBtn');
+    const downBtn = document.getElementById('downBtn');
+    const exitBtn = document.getElementById('exitBtn');
+    let DEFAULT_SECONDS = 5 * 60;
+    let presetSeconds = DEFAULT_SECONDS;
+    let remainingSeconds = DEFAULT_SECONDS;
+    let running = false;
+    function format(secs) {
+      const m = String(Math.floor(secs / 60)).padStart(2, "0");
+      const s = String(secs % 60).padStart(2, "0");
+      return `${m}:${s}`;
+    }
+    function render() {
+      timerDisplay.textContent = format(remainingSeconds);
+    }
+    function tick() {
+      if (!running) return;
+      if (remainingSeconds > 0) {
+        --remainingSeconds;
+        render();
+      }
+    }
+    startBtn.onclick = () => {
+      running = !running;
+      startBtn.textContent = running ? "Pause" : "Start";
+    };
+    resetBtn.onclick = () => {
+      running = false;
+      remainingSeconds = presetSeconds;
+      render();
+      startBtn.textContent = "Start";
+    };
+    upBtn.onclick = () => {
+      presetSeconds += 10;
+      remainingSeconds += 10;
+      render();
+    };
+    downBtn.onclick = () => {
+      if (presetSeconds > 10) {
+        presetSeconds -= 10;
+        remainingSeconds = Math.max(remainingSeconds - 10, 0);
+        render();
+      }
+    };
+    exitBtn.onclick = () => {
+      running = false;
+      window.close();
+    };
+    setInterval(tick, 1000);
+    render();
+  </script>
+</body>
+</html>
