@@ -1,0 +1,256 @@
+<!--  File: countdown.html  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Countdown Timer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <!-- Randomized helper framework (anime.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
+    <style>
+        /* ==========  RESET & LAYOUT  ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #ffffff;
+            transition: background 0.3s;
+        }
+
+        #appContainer {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ==========  TIMER  ========== */
+        #timerDisplay {
+            font-size: 18vw;          /* Scales with viewport width */
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: #000000;
+            text-align: center;
+            line-height: 1;
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        /* ==========  BUTTONS  ========== */
+        .controlBtn {
+            position: absolute;
+            background: rgba(0,0,0,0.7);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 4vw;
+            padding: 1.5vh 2.5vw;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .controlBtn:active { background: rgba(0,0,0,0.9); }
+
+        #btnUp    { left:  2vw; bottom: 2vh; }
+        #btnDown  { right: 2vw; bottom: 2vh; }
+        #btnStart { left:  50%; transform: translateX(-50%); bottom: 2vh; }
+        #btnExit  { right: 2vw; top:    2vh; background: rgba(220,0,0,0.8); }
+
+        /* Hide buttons when screen is red-solid for 5 s */
+        .expired .controlBtn { visibility: hidden; }
+
+        /* ==========  TOP MARQUEE  ========== */
+        #marqueeContainer {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            pointer-events: none;
+            font-size: 2.8vw;
+            background: transparent;
+            color: #444;
+        }
+        @keyframes marquee {
+            0%   { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        #marqueeText {
+            display: inline-block;
+            animation: marquee 10s linear infinite;
+        }
+
+        /* ==========  WARNING & FLASHING  ========== */
+        @keyframes flashBg {
+            0%, 100% { background: #ffffff; }
+            50%      { background: #ff0000; }
+        }
+        .warning   { animation: flashBg 1s linear infinite; }
+        .expired   { background: #ff0000 !important; }
+
+    </style>
+</head>
+
+<body>
+    <div id="appContainer">
+        <div id="marqueeContainer"><span id="marqueeText">The Taylor Drew Review&nbsp;&nbsp;&nbsp;</span></div>
+
+        <div id="timerDisplay">05:00</div>
+
+        <!--  Control Buttons  -->
+        <button id="btnUp"    class="controlBtn">▲</button>
+        <button id="btnDown"  class="controlBtn">▼</button>
+        <button id="btnStart" class="controlBtn">Start</button>
+        <button id="btnExit"  class="controlBtn">Exit</button>
+    </div>
+
+<script>
+/* =========================================================
+   Countdown Timer – fits any iOS viewport
+   ========================================================= */
+(() => {
+    /* -----  Configurable constants  ----- */
+    const TEN_SECONDS        = 10_000;
+    const DEFAULT_TIME_MS    = 5 * 60 * 1000; // 5 minutes
+    const WARNING_THRESHOLD  = 60 * 1000;     // 1 minute
+    const EXPIRED_HOLD_MS    = 5 * 1000;      // 5 seconds
+    const MIN_TIME_MS        = TEN_SECONDS;   // never go below 10s
+    const MAX_TIME_MS        = 60 * 60 * 1000; // cap at 60 min
+
+    /* -----  DOM Refs  ----- */
+    const timerDisplay = document.getElementById('timerDisplay');
+    const btnUp        = document.getElementById('btnUp');
+    const btnDown      = document.getElementById('btnDown');
+    const btnStart     = document.getElementById('btnStart');
+    const btnExit      = document.getElementById('btnExit');
+    const body         = document.body;
+
+    /* -----  State  ----- */
+    let targetTimeMs  = DEFAULT_TIME_MS;
+    let remainingMs   = targetTimeMs;
+    let running       = false;
+    let intervalId    = null;
+    let warningActive = false;
+
+    /* -----  Helper Functions ----- */
+    const msToTime = ms => {
+        const totalSeconds = Math.ceil(ms / 1000);
+        const minutes = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
+        const seconds = (totalSeconds % 60).toString().padStart(2, '0');
+        return `${minutes}:${seconds}`;
+    };
+
+    const updateDisplay = () => {
+        timerDisplay.textContent = msToTime(remainingMs);
+    };
+
+    const beginWarning = () => {
+        if (!warningActive) {
+            warningActive = true;
+            body.classList.add('warning');
+            timerDisplay.style.color = '#ffffff';
+        }
+    };
+
+    const endWarning = () => {
+        warningActive = false;
+        body.classList.remove('warning');
+        timerDisplay.style.color = '#000000';
+    };
+
+    const resetTimer = () => {
+        clearInterval(intervalId);
+        intervalId = null;
+        running = false;
+        remainingMs = targetTimeMs;
+        endWarning();
+        body.classList.remove('expired');
+        updateDisplay();
+        btnStart.textContent = 'Start';
+    };
+
+    /* -----  Countdown Loop  ----- */
+    const tick = () => {
+        remainingMs -= 1000;
+        if (remainingMs <= 0) {
+            // Timer reached 0
+            clearInterval(intervalId);
+            intervalId = null;
+            timerDisplay.textContent = '00:00';
+            body.classList.remove('warning');
+            body.classList.add('expired');
+
+            // Hold red screen, then reset
+            setTimeout(() => {
+                body.classList.remove('expired');
+                resetTimer();
+            }, EXPIRED_HOLD_MS);
+            return;
+        }
+
+        if (remainingMs <= WARNING_THRESHOLD) beginWarning();
+        updateDisplay();
+    };
+
+    /* -----  Event Handlers  ----- */
+    btnStart.addEventListener('click', () => {
+        if (running) {
+            // Pause
+            running = false;
+            clearInterval(intervalId);
+            intervalId = null;
+            btnStart.textContent = 'Start';
+        } else {
+            // Start / Resume
+            running = true;
+            btnStart.textContent = 'Pause';
+            intervalId = setInterval(tick, 1000);
+        }
+    });
+
+    btnUp.addEventListener('click', () => {
+        if (running) return; // don't allow modification while running
+        targetTimeMs = Math.min(targetTimeMs + TEN_SECONDS, MAX_TIME_MS);
+        remainingMs  = targetTimeMs;
+        updateDisplay();
+    });
+
+    btnDown.addEventListener('click', () => {
+        if (running) return;
+        targetTimeMs = Math.max(targetTimeMs - TEN_SECONDS, MIN_TIME_MS);
+        remainingMs  = targetTimeMs;
+        updateDisplay();
+    });
+
+    btnExit.addEventListener('click', () => {
+        // Attempt to close; if not allowed, fallback to alert
+        if (window.close) {
+            window.close();
+        } else {
+            alert('Unable to close the web-app from this context.');
+        }
+    });
+
+    /* -----  Initialization  ----- */
+    updateDisplay();
+
+    /* Maintain full-screen look on resize/orientation change */
+    window.addEventListener('resize', () => {
+        timerDisplay.style.fontSize = `${Math.min(window.innerWidth, window.innerHeight) * 0.18}px`;
+    });
+})();
+</script>
+</body>
+</html>
