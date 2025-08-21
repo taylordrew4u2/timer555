@@ -71,35 +71,38 @@
             z-index: 10;
         }
         .controlBtn {
-            background: #ff4b7d;
+            background: #444;
             color: #fff;
             border: none;
-            border-radius: 50%;
-            width: 4.5em;
-            height: 4.5em;
-            font-size: 2.2em;
+            border-radius: 0.5em;
+            min-width: 3.2em;
+            min-height: 2.2em;
+            font-size: 1em;
+            padding: 0.2em 0.7em;
+            margin: 0 0.2em;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
             transition: background 0.2s, transform 0.1s;
             cursor: pointer;
             outline: none;
+            font-family: inherit;
         }
         .controlBtn:active {
-            background: #e02d5a;
-            transform: scale(0.92);
+            background: #222;
+            transform: scale(0.96);
         }
         .controlBtn[title="Start/Pause"] {
             background: #ffb347;
-            color: #fff;
+            color: #222;
         }
         .controlBtn[title="Reset"] {
             background: #4bcaff;
-            color: #fff;
+            color: #222;
         }
         .controlBtn[title="Exit"] {
-            background: #222;
+            background: #ff4b7d;
             color: #fff;
         }
         .flashRed { animation: flash 1s step-start infinite; }
@@ -114,13 +117,13 @@
     </div>
     <!-- giant countdown -->
     <div id="timerDisplay">05:00</div>
-    <!-- controls: all heart-shaped, in a row -->
+    <!-- controls: all labeled, small, in a row -->
     <div id="buttonRow">
-        <button id="upBtn"    class="controlBtn" title="Add 10s">&#10084;</button>
-        <button id="startBtn" class="controlBtn" title="Start/Pause">&#10084;</button>
-        <button id="resetBtn" class="controlBtn" title="Reset">&#10084;</button>
-        <button id="downBtn"  class="controlBtn" title="Subtract 10s">&#10084;</button>
-        <button id="exitBtn"  class="controlBtn" title="Exit">&#10084;</button>
+        <button id="upBtn"    class="controlBtn" title="Add 10s">+10s</button>
+        <button id="startBtn" class="controlBtn" title="Start/Pause">Start/Pause</button>
+        <button id="resetBtn" class="controlBtn" title="Reset">Reset</button>
+        <button id="downBtn"  class="controlBtn" title="Subtract 10s">-10s</button>
+        <button id="exitBtn"  class="controlBtn" title="Exit">Exit</button>
     </div>
     <script>
         (function () {
