@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Full-Screen Countdown</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- (Randomized) Animation helper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #000;
+            --fg-color: #fff;
+            --alert-color: #ff0000;
+        }
+
+        /* base */
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: var(--bg-color);
+            color: var(--fg-color);
+            font-family: "Courier New", monospace;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* top ticker */
+        #ticker {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            pointer-events: none;
+            font-size: 1rem;
+        }
+        #ticker span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: tickerMove 10s linear infinite;
+        }
+        @keyframes tickerMove {
+            0%   { transform: translateX(0);   }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* timer text */
+        #timerDisplay {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20vw;           /* auto-size */
+            user-select: none;
+        }
+
+        /* buttons */
+        .controlBtn {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 0.5em 1em;
+            font-size: 1.25rem;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+        #startBtn { bottom: 10%; left: 50%; transform: translateX(-50%); }
+        #exitBtn  { top:  2%;  right: 2%; }
+        #upBtn    { bottom: 2%; left: 2%; }
+        #downBtn  { bottom: 2%; right: 2%; }
+
+        /* flashing */
+        .flashRed { animation: flash 1s step-start infinite; }
+        @keyframes flash { 50% { background: var(--alert-color); } }
+
+        /* text alert */
+        .alertText { color: var(--alert-color); }
+    </style>
+</head>
+<body>
+    <!-- scrolling headline -->
+    <div id="ticker">
+        <span>The Taylor Drew Review • The Taylor Drew Review • </span>
+    </div>
+
+    <!-- giant countdown -->
+    <div id="timerDisplay">05:00</div>
+
+    <!-- controls -->
+    <button id="startBtn" class="controlBtn">Start</button>
+    <button id="exitBtn"  class="controlBtn">Exit</button>
+    <button id="upBtn"    class="controlBtn">▲</button>
+    <button id="downBtn"  class="controlBtn">▼</button>
+
+    <script>
+        (function () {
+            const timerDisplay = document.getElementById("timerDisplay");
+            const startBtn     = document.getElementById("startBtn");
+            const exitBtn      = document.getElementById("exitBtn");
+            const upBtn        = document.getElementById("upBtn");
+            const downBtn      = document.getElementById("downBtn");
+            const body         = document.body;
+
+            const DEFAULT_SECONDS = 5 * 60;     // 5-minute start
+            let presetSeconds    = DEFAULT_SECONDS;
+            let remainingSeconds = DEFAULT_SECONDS;
+            let running          = false;
+
+            /* helpers */
+            function format(secs) {
+                const m = String(Math.floor(secs / 60)).padStart(2, "0");
+                const s = String(secs % 60).padStart(2, "0");
+                return `${m}:${s}`;
+            }
+
+            function render() {
+                timerDisplay.textContent = format(remainingSeconds);
+
+                // alert status
+                if (remainingSeconds <= 60 && remainingSeconds > 0) {
+                    timerDisplay.classList.add("alertText");
+                    body.classList.add("flashRed");
+                } else {
+                    timerDisplay.classList.remove("alertText");
+                    body.classList.remove("flashRed");
+                }
+            }
+
+            /* countdown driver */
+            function tick() {
+                if (!running) return;
+
+                if (remainingSeconds > 0) {
+                    --remainingSeconds;
+                    render();
+
+                    if (remainingSeconds === 0) {
+                        running = false;
+                        blastRed();
+                    }
+                }
+            }
+
+            /* zero reached → solid red for 5 s */
+            function blastRed() {
+                body.style.background = "var(--alert-color)";
+                timerDisplay.style.visibility = "hidden";
+
+                setTimeout(() => {
+                    body.style.background = "var(--bg-color)";
+                    timerDisplay.style.visibility = "visible";
+                    reset();
+                }, 5000);
+            }
+
+            /* reset */
+            function reset() {
+                remainingSeconds = presetSeconds;
+                render();
+            }
+
+            /* button actions */
+            startBtn.onclick = () => {
+                running = !running;
+                startBtn.textContent = running ? "Pause" : "Start";
+            };
+
+            exitBtn.onclick = () => {
+                running = false;
+                window.close();                // will work only for windows opened by script
+            };
+
+            upBtn.onclick = () => {
+                presetSeconds += 10;
+                remainingSeconds += 10;
+                animate(upBtn);
+                render();
+            };
+
+            downBtn.onclick = () => {
+                if (presetSeconds > 10) {
+                    presetSeconds  -= 10;
+                    remainingSeconds = Math.max(remainingSeconds - 10, 0);
+                    animate(downBtn);
+                    render();
+                }
+            };
+
+            /* small click bounce using anime.js */
+            function animate(btn) {
+                anime({
+                    targets: btn,
+                    scale: [1, 1.2, 1],
+                    easing: "easeInOutQuad",
+                    duration: 200
+                });
+            }
+
+            /* master clock */
+            render();
+            setInterval(tick, 1000);
+        })();
+    </script>
+</body>
+</html>
