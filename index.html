@@ -217,28 +217,7 @@
     <div id="flash" aria-hidden="true"></div>
     <div id="solid" aria-hidden="true"></div>
     <div id="toast" role="status" aria-live="polite">Browsers don’t allow pages to exit themselves.</div>
-    <!-- Fullscreen button in the top-right corner -->
-    <button id="fullscreenBtn" title="Go Fullscreen" aria-label="Go Fullscreen" style="
-    position: fixed;
-    top: 16px;
-    right: 16px;
-    z-index: 100;
-    background: rgba(0,0,0,0.7);
-    color: #0ff;
-    border: 2px solid #0ff;
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    font-size: 1.6em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 2px 8px #000a;
-    transition: background 0.2s;
-  ">
-    <span style="pointer-events:none;">⛶</span>
-  </button>
+
     <div class="wrap">
         <div class="marquee-outer" aria-hidden="true">
             <div class="marquee-track">the Taylor drew review &nbsp; • &nbsp; the Taylor drew review &nbsp; • &nbsp; the Taylor drew review &nbsp; • &nbsp;</div>
@@ -256,58 +235,23 @@
     </div>
     <script>
         (() => {
-            // Fullscreen button logic with iOS detection
-            const fullscreenBtn = document.getElementById('fullscreenBtn');
-            const fullscreenMsg = document.getElementById('fullscreenMsg');
 
-            function isIOS() {
-                return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-            }
 
-            function isSafari() {
-                return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-            }
-
-            function isFullscreen() {
-                return document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
-            }
-
-            function requestFullscreen(elem) {
-                if (elem.requestFullscreen) return elem.requestFullscreen();
-                if (elem.webkitRequestFullscreen) return elem.webkitRequestFullscreen();
-                if (elem.mozRequestFullScreen) return elem.mozRequestFullScreen();
-                if (elem.msRequestFullscreen) return elem.msRequestFullscreen();
-            }
-
-            function exitFullscreen() {
-                if (document.exitFullscreen) return document.exitFullscreen();
-                if (document.webkitExitFullscreen) return document.webkitExitFullscreen();
-                if (document.mozCancelFullScreen) return document.mozCancelFullScreen();
-                if (document.msExitFullscreen) return document.msExitFullscreen();
-            }
-            // Show/hide fullscreen button and message based on iOS
-            if (isIOS() || isSafari()) {
-                fullscreenBtn.style.display = 'none';
-                fullscreenMsg.style.display = 'block';
-            } else {
-                fullscreenBtn.style.display = 'flex';
-                fullscreenMsg.style.display = 'none';
-                fullscreenBtn.addEventListener('click', () => {
-                    if (!isFullscreen()) {
-                        requestFullscreen(document.documentElement);
-                    } else {
-                        exitFullscreen();
-                    }
-                });
-            }
 
             const timerEl = document.getElementById('timer');
             const upBtn = document.getElementById('upBtn');
             const downBtn = document.getElementById('downBtn');
-
             const resetBtn = document.getElementById('resetBtn');
             const startBtn = document.getElementById('startBtn');
             const toastEl = document.getElementById('toast');
+
+            const SOLID_MS = 5000;
+            let baseSeconds = 300; // default 5 minutes
+            let isRunning = false;
+            let deadline = null; // timestamp (ms) when countdown hits 0
+            let pausedRemaining = baseSeconds;
+            let solidUntil = 0; // timestamp (ms) until which solid red is shown
+            let rafId = 0;
 
             function start() {
                 if (document.body.classList.contains('solid')) return; // ignore during solid screen
@@ -332,15 +276,8 @@
                 if (isRunning) pause();
                 else start();
             }
-            addButtonHandler(startBtn, toggleStart);
 
-            const SOLID_MS = 5000;
-            let baseSeconds = 300; // default 5 minutes
-            let isRunning = false;
-            let deadline = null; // timestamp (ms) when countdown hits 0
-            let pausedRemaining = baseSeconds;
-            let solidUntil = 0; // timestamp (ms) until which solid red is shown
-            let rafId = 0;
+            addButtonHandler(startBtn, toggleStart);
 
             function format(seconds) {
                 seconds = Math.max(0, Math.floor(seconds));
