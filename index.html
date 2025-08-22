@@ -41,6 +41,67 @@
             width: 100vw;
         }
         
+        .marquee-outer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            overflow: hidden;
+            height: 32px;
+            padding: 0;
+            background: #000;
+            z-index: 1000;
+        }
+        
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(100vw);
+            }
+            100% {
+                transform: translateX(-100vw);
+            }
+        }
+        
+        .timer-area {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            position: relative;
+            height: 100%;
+            overflow: auto;
+        }
+        
+        #timer {
+            font-family: Arial, sans-serif;
+            font-variant-numeric: tabular-nums;
+            font-size: clamp(8vw, 18vmin, 24vw);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: 1.8vmin;
+            text-align: center;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            color: #fff;
+            background: transparent;
+            /* border-radius removed */
+            padding: 0.08em 0.5em 0.12em 0.5em;
+            box-shadow: none;
+            width: 100%;
+            max-width: 96vw;
+            max-height: 60vh;
+            height: 100%;
+            box-sizing: border-box;
+            display: inline-block;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow: hidden;
+        }
+        
         #timer.red {
             color: #ff2b2b;
             text-shadow: none;
@@ -158,7 +219,19 @@
     <div id="toast" role="status" aria-live="polite">Browsers don’t allow pages to exit themselves.</div>
 
     <div class="wrap">
-
+        <div class="marquee-outer" aria-hidden="true">
+            <div class="marquee-track" style="
+                display: inline-block;
+                white-space: nowrap;
+                min-width: 100vw;
+                font-size: 1.2em;
+                color: #fff;
+                letter-spacing: 0.15em;
+                animation: scroll-left 16s linear infinite;
+            ">
+                THE OPEN MICER TIMER &nbsp; • &nbsp; THE OPEN MICER TIMER &nbsp; • &nbsp; THE OPEN MICER TIMER &nbsp; • &nbsp; THE OPEN MICER TIMER &nbsp; • &nbsp; THE OPEN MICER TIMER &nbsp; • &nbsp; THE OPEN MICER TIMER
+            </div>
+        </div>
         <main class="timer-area">
             <div id="timer" aria-label="Countdown Timer">5:00</div>
             <div class="controls">
@@ -166,23 +239,182 @@
                 <button class="btn" id="startBtn" title="Start / Pause" aria-label="Start or Pause Timer" role="button" tabindex="0">Start</button>
                 <button class="btn" id="resetBtn" title="Reset Timer" aria-label="Reset Timer" role="button" tabindex="0">Reset</button>
 
-                <button class="btn" id="upBtn" title="Up 10s" aria-label="Up 10 seconds" role="button" tabindex="0">▲ +10s</button> const toastEl = document.getElementById('toast'); const SOLID_MS = 5000; let baseSeconds = 300; // default 5 minutes let
-                isRunning = false; let deadline = null; // timestamp (ms) when countdown hits 0 let pausedRemaining = baseSeconds; let solidUntil = 0; // timestamp (ms) until which solid red is shown let rafId = 0; function start() { if (document.body.classList.contains('solid'))
-                return; // ignore during solid screen if (!isRunning) { const startFrom = remainingSeconds(); deadline = now() + startFrom * 1000; isRunning = true; startBtn.textContent = 'Pause'; } } function pause() { if (isRunning) { pausedRemaining
-                = remainingSeconds(); isRunning = false; deadline = null; startBtn.textContent = 'Start'; } } function toggleStart() { if (isRunning) pause(); else start(); } addButtonHandler(startBtn, toggleStart); function format(seconds) { seconds
-                = Math.max(0, Math.floor(seconds)); const m = Math.floor(seconds / 60); const s = seconds % 60; return `${m}:${String(s).padStart(2, '0')}`; } function now() { return Date.now(); } function remainingSeconds() { if (document.body.classList.contains('solid'))
-                return 0; if (isRunning && deadline) { return Math.ceil((deadline - now()) / 1000); } else { return pausedRemaining; } } function setRemaining(newSeconds) { newSeconds = Math.max(0, Math.min(36000, newSeconds)); // clamp 0..10h if (isRunning
-                && deadline) { deadline = now() + newSeconds * 1000; } else { pausedRemaining = newSeconds; } updateImmediate(); } function resetTimer() { isRunning = false; deadline = null; pausedRemaining = baseSeconds; updateImmediate(); } function
-                showToast(msg, ms = 1800) { toastEl.textContent = msg; toastEl.classList.add('show'); setTimeout(() => toastEl.classList.remove('show'), ms); } function enterSolid() { document.body.classList.remove('flash'); document.body.classList.add('solid');
-                isRunning = false; deadline = null; solidUntil = Date.now() + SOLID_MS; } function maybeLeaveSolid() { if (document.body.classList.contains('solid') && Date.now() >= solidUntil) { document.body.classList.remove('solid'); pausedRemaining
-                = baseSeconds; isRunning = true; deadline = Date.now() + pausedRemaining * 1000; } } function updateImmediate() { const rem = remainingSeconds(); timerEl.textContent = format(rem); if (rem
-                <=6 0 && !document.body.classList.contains(
-                    'solid')) { timerEl.classList.add( 'red'); document.body.classList.add( 'flash'); } else { timerEl.classList.remove( 'red'); document.body.classList.remove( 'flash'); } } function tick() { rafId=r equestAnimationFrame(tick); if (document.body.classList.contains(
-                    'solid')) { maybeLeaveSolid(); return; } if (isRunning) { const rem=r emainingSeconds(); if (rem <=0 ) { timerEl.textContent="0:00" ; enterSolid(); return; } } updateImmediate(); } function addButtonHandler(btn, handler) { let touchHandled=f
-                    alse; btn.addEventListener( 'touchend', function(e) { e.preventDefault(); touchHandled=t rue; handler(); setTimeout(()=> { touchHandled = false; }, 350); }, { passive: false }); btn.addEventListener('click', function(e) { if (touchHandled) return; handler(); }); } addButtonHandler(upBtn, () => setRemaining(remainingSeconds() + 10)); addButtonHandler(downBtn,
-                    () => setRemaining(remainingSeconds() - 10)); addButtonHandler(resetBtn, resetTimer); document.addEventListener('visibilitychange', () => { updateImmediate(); }); window.addEventListener('focus', updateImmediate); window.addEventListener('resize',
-                    updateImmediate); window.addEventListener('orientationchange', updateImmediate); updateImmediate(); cancelAnimationFrame(rafId); tick(); })();
-                    </script>
+                <button class="btn" id="upBtn" title="Up 10s" aria-label="Up 10 seconds" role="button" tabindex="0">▲ +10s</button>
+            </div>
+        </main>
+    </div>
+    <script>
+        (() => {
+
+
+
+            const timerEl = document.getElementById('timer');
+            const upBtn = document.getElementById('upBtn');
+            const downBtn = document.getElementById('downBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const startBtn = document.getElementById('startBtn');
+            const toastEl = document.getElementById('toast');
+
+            const SOLID_MS = 5000;
+            let baseSeconds = 300; // default 5 minutes
+            let isRunning = false;
+            let deadline = null; // timestamp (ms) when countdown hits 0
+            let pausedRemaining = baseSeconds;
+            let solidUntil = 0; // timestamp (ms) until which solid red is shown
+            let rafId = 0;
+
+            function start() {
+                if (document.body.classList.contains('solid')) return; // ignore during solid screen
+                if (!isRunning) {
+                    const startFrom = remainingSeconds();
+                    deadline = now() + startFrom * 1000;
+                    isRunning = true;
+                    startBtn.textContent = 'Pause';
+                }
+            }
+
+            function pause() {
+                if (isRunning) {
+                    pausedRemaining = remainingSeconds();
+                    isRunning = false;
+                    deadline = null;
+                    startBtn.textContent = 'Start';
+                }
+            }
+
+            function toggleStart() {
+                if (isRunning) pause();
+                else start();
+            }
+
+            addButtonHandler(startBtn, toggleStart);
+
+            function format(seconds) {
+                seconds = Math.max(0, Math.floor(seconds));
+                const m = Math.floor(seconds / 60);
+                const s = seconds % 60;
+                return `${m}:${String(s).padStart(2, '0')}`;
+            }
+
+            function now() {
+                return Date.now();
+            }
+
+            function remainingSeconds() {
+                if (document.body.classList.contains('solid')) return 0;
+                if (isRunning && deadline) {
+                    return Math.ceil((deadline - now()) / 1000);
+                } else {
+                    return pausedRemaining;
+                }
+            }
+
+            function setRemaining(newSeconds) {
+                newSeconds = Math.max(0, Math.min(36000, newSeconds)); // clamp 0..10h
+                if (isRunning && deadline) {
+                    deadline = now() + newSeconds * 1000;
+                } else {
+                    pausedRemaining = newSeconds;
+                }
+                updateImmediate();
+            }
+
+            function resetTimer() {
+                isRunning = false;
+                deadline = null;
+                pausedRemaining = baseSeconds;
+                updateImmediate();
+            }
+
+            function showToast(msg, ms = 1800) {
+                toastEl.textContent = msg;
+                toastEl.classList.add('show');
+                setTimeout(() => toastEl.classList.remove('show'), ms);
+            }
+
+
+
+            function enterSolid() {
+                document.body.classList.remove('flash');
+                document.body.classList.add('solid');
+                isRunning = false;
+                deadline = null;
+                solidUntil = Date.now() + SOLID_MS;
+            }
+
+            function maybeLeaveSolid() {
+                if (document.body.classList.contains('solid') && Date.now() >= solidUntil) {
+                    document.body.classList.remove('solid');
+                    pausedRemaining = baseSeconds;
+                    isRunning = true;
+                    deadline = Date.now() + pausedRemaining * 1000;
+                }
+            }
+
+            function updateImmediate() {
+                const rem = remainingSeconds();
+                timerEl.textContent = format(rem);
+                if (rem <= 60 && !document.body.classList.contains('solid')) {
+                    timerEl.classList.add('red');
+                    document.body.classList.add('flash');
+                } else {
+                    timerEl.classList.remove('red');
+                    document.body.classList.remove('flash');
+                }
+            }
+
+            function tick() {
+                rafId = requestAnimationFrame(tick);
+                if (document.body.classList.contains('solid')) {
+                    maybeLeaveSolid();
+                    return;
+                }
+                if (isRunning) {
+                    const rem = remainingSeconds();
+                    if (rem <= 0) {
+                        timerEl.textContent = "0:00";
+                        enterSolid();
+                        return;
+                    }
+                }
+                updateImmediate();
+            }
+
+            function addButtonHandler(btn, handler) {
+                let touchHandled = false;
+                btn.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    touchHandled = true;
+                    handler();
+                    setTimeout(() => {
+                        touchHandled = false;
+                    }, 350);
+                }, {
+                    passive: false
+                });
+                btn.addEventListener('click', function(e) {
+                    if (touchHandled) return;
+                    handler();
+                });
+            }
+
+            addButtonHandler(upBtn, () => setRemaining(remainingSeconds() + 10));
+            addButtonHandler(downBtn, () => setRemaining(remainingSeconds() - 10));
+
+            addButtonHandler(resetBtn, resetTimer);
+
+            document.addEventListener('visibilitychange', () => {
+                updateImmediate();
+            });
+            window.addEventListener('focus', updateImmediate);
+            window.addEventListener('resize', updateImmediate);
+            window.addEventListener('orientationchange', updateImmediate);
+
+            updateImmediate();
+            cancelAnimationFrame(rafId);
+            tick();
+        })();
+    </script>
 </body>
 
 </html>
