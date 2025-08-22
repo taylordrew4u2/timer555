@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/swis721-blkex-bt" />
     <style>
- :root {
+         :root {
             --bg: #000;
             --fg: #fff;
             --accent: #ff2b2b;
@@ -56,146 +56,160 @@
                 transform: translateX(-100%);
             }
         }
-    }
-    .timer-area {
-        flex: 1 1 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: env(safe-area-inset-top, 0) 0 env(safe-area-inset-bottom, 0) 0;
-        position: relative;
-        height: 100%;
-        overflow: auto;
-    }
-    #timer {
-        font-family: 'Swis721 BlkEx BT', 'Arial Black', Impact, Arial, 'Liberation Sans', 'Nimbus Sans L', 'DejaVu Sans', sans-serif;
-        font-variant-numeric: tabular-nums;
-        font-size: clamp(8vw, 18vmin, 24vw);
-        font-weight: 900;
-        line-height: 1.05;
-        letter-spacing: 1.8vmin;
-        text-align: center;
-        user-select: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        color: #fff;
-        background: transparent;
-        border-radius: 0.2em;
-        padding: 0.08em 0.5em 0.12em 0.5em;
-        box-shadow: none;
-        width: 100%;
-        max-width: 96vw;
-        max-height: 60vh;
-        height: 100%;
-        box-sizing: border-box;
-        display: inline-block;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        overflow: hidden;
-    }
-    @media (orientation: portrait) {
-        #timer {
-            font-size: clamp(6vw, 12vmin, 18vw);
-            max-height: 40vh;
+        
+        .timer-area {
+            flex: 1 1 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: env(safe-area-inset-top, 0) 0 env(safe-area-inset-bottom, 0) 0;
+            position: relative;
+            height: 100%;
+            overflow: auto;
         }
-    }
-}
-#timer.red {
-    color: #ff2b2b;
-    text-shadow: none;
-    background: transparent;
-    box-shadow: none;
-}
-.controls {
-    display: flex;
-    gap: 6px;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1.5vmin;
-    margin-bottom: 0;
-    padding: 0;
-    position: relative;
-    width: 100%;
-    max-width: 90vw;
-}
-.btn {
-    flex: 0 1 auto;
-    background: transparent;
-    color: var(--fg);
-    border: 2px solid var(--fg);
-    border-radius: 10px;
-    padding: 6px 8px;
-    font-size: clamp(12px, 2.2vmin, 16px);
-    font-weight: 700;
-    text-transform: none;
-    letter-spacing: .2px;
-    outline: none;
-    cursor: pointer;
-    touch-action: manipulation;
-    min-width: 48px;
-    min-height: 32px;
-}
-.btn:active {
-    transform: scale(0.98);
-}
-.btn:focus-visible {
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
-}
-#flash {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background: rgba(255, 0, 0, 0);
-    display: none;
-    z-index: 5;
-    animation: flashRed 0.8s ease-in-out infinite alternate;
-}
-body.flash #flash {
-    display: block;
-}
-@keyframes flashRed {
-    from {
-        background: rgba(255, 0, 0, 0.12);
-    }
-    to {
-        background: rgba(255, 0, 0, 0.45);
-    }
-}
-#solid {
-    position: fixed;
-    inset: 0;
-    background: var(--accent);
-    display: none;
-    z-index: 10;
-}
-body.solid #solid {
-    display: block;
-}
-#toast {
-    position: fixed;
-    left: 50%;
-    bottom: calc(70px + env(safe-area-inset-bottom));
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, .7);
-    color: #fff;
-    padding: 10px 14px;
-    border-radius: 10px;
-    font-size: 14px;
-    display: none;
-    z-index: 20;
-    max-width: 90vw;
-    text-align: center;
-}
-#toast.show {
-    display: block;
-}
-html,
-body {
-    overflow: hidden;
-    -webkit-overflow-scrolling: touch;
-    touch-action: manipulation;
-}
+        
+        #timer {
+            font-family: 'Swis721 BlkEx BT', 'Arial Black', Impact, Arial, 'Liberation Sans', 'Nimbus Sans L', 'DejaVu Sans', sans-serif;
+            font-variant-numeric: tabular-nums;
+            font-size: clamp(8vw, 18vmin, 24vw);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: 1.8vmin;
+            text-align: center;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            color: #fff;
+            background: transparent;
+            border-radius: 0.2em;
+            padding: 0.08em 0.5em 0.12em 0.5em;
+            box-shadow: none;
+            width: 100%;
+            max-width: 96vw;
+            max-height: 60vh;
+            height: 100%;
+            box-sizing: border-box;
+            display: inline-block;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow: hidden;
+        }
+        
+        @media (orientation: portrait) {
+            #timer {
+                font-size: clamp(6vw, 12vmin, 18vw);
+                max-height: 40vh;
+            }
+        }
+        
+        #timer.red {
+            color: #ff2b2b;
+            text-shadow: none;
+            background: transparent;
+            box-shadow: none;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1.5vmin;
+            margin-bottom: 0;
+            padding: 0;
+            position: relative;
+            width: 100%;
+            max-width: 90vw;
+        }
+        
+        .btn {
+            flex: 0 1 auto;
+            background: transparent;
+            color: var(--fg);
+            border: 2px solid var(--fg);
+            border-radius: 10px;
+            padding: 6px 8px;
+            font-size: clamp(12px, 2.2vmin, 16px);
+            font-weight: 700;
+            text-transform: none;
+            letter-spacing: .2px;
+            outline: none;
+            cursor: pointer;
+            touch-action: manipulation;
+            min-width: 48px;
+            min-height: 32px;
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
+        .btn:focus-visible {
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
+        }
+        
+        #flash {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: rgba(255, 0, 0, 0);
+            display: none;
+            z-index: 5;
+            animation: flashRed 0.8s ease-in-out infinite alternate;
+        }
+        
+        body.flash #flash {
+            display: block;
+        }
+        
+        @keyframes flashRed {
+            from {
+                background: rgba(255, 0, 0, 0.12);
+            }
+            to {
+                background: rgba(255, 0, 0, 0.45);
+            }
+        }
+        
+        #solid {
+            position: fixed;
+            inset: 0;
+            background: var(--accent);
+            display: none;
+            z-index: 10;
+        }
+        
+        body.solid #solid {
+            display: block;
+        }
+        
+        #toast {
+            position: fixed;
+            left: 50%;
+            bottom: calc(70px + env(safe-area-inset-bottom));
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, .7);
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: none;
+            z-index: 20;
+            max-width: 90vw;
+            text-align: center;
+        }
+        
+        #toast.show {
+            display: block;
+        }
+        
+        html,
+        body {
+            overflow: hidden;
+            -webkit-overflow-scrolling: touch;
+            touch-action: manipulation;
+        }
     </style>
 </head>
 
