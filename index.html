@@ -115,21 +115,25 @@
             gap: 16px;
             justify-content: center;
             align-items: center;
-            margin-top: 0;
-            margin-bottom: 0;
+            margin: 0;
             padding: 0;
-            position: relative;
-            width: auto;
-            max-width: 90vw;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            max-width: 100vw;
+            z-index: 1001;
+            background: transparent;
         }
         
         .btn {
             flex: 0 1 auto;
             background: none;
             color: #fff;
-            border: none;
-            border-radius: 0;
-            padding: 0;
+            border: 2px solid #fff;
+            border-radius: 6px;
+            padding: 0.2em 0.8em;
+            box-sizing: border-box;
             font-size: clamp(12px, 2.2vmin, 16px);
             font-weight: 700;
             text-transform: none;
