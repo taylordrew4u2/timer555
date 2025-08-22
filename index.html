@@ -41,9 +41,6 @@
             width: 100vw;
         }
         
-
-        
-        
         #timer.red {
             color: #ff2b2b;
             text-shadow: none;
@@ -169,169 +166,23 @@
                 <button class="btn" id="startBtn" title="Start / Pause" aria-label="Start or Pause Timer" role="button" tabindex="0">Start</button>
                 <button class="btn" id="resetBtn" title="Reset Timer" aria-label="Reset Timer" role="button" tabindex="0">Reset</button>
 
-                <button class="btn" id="upBtn" title="Up 10s" aria-label="Up 10 seconds" role="button" tabindex="0">▲ +10s</button>
-            const toastEl = document.getElementById('toast');
-
-            const SOLID_MS = 5000;
-            let baseSeconds = 300; // default 5 minutes
-            let isRunning = false;
-            let deadline = null; // timestamp (ms) when countdown hits 0
-            let pausedRemaining = baseSeconds;
-            let solidUntil = 0; // timestamp (ms) until which solid red is shown
-            let rafId = 0;
-
-            function start() {
-                if (document.body.classList.contains('solid')) return; // ignore during solid screen
-                if (!isRunning) {
-                    const startFrom = remainingSeconds();
-                    deadline = now() + startFrom * 1000;
-                    isRunning = true;
-                    startBtn.textContent = 'Pause';
-                }
-            }
-
-            function pause() {
-                if (isRunning) {
-                    pausedRemaining = remainingSeconds();
-                    isRunning = false;
-                    deadline = null;
-                    startBtn.textContent = 'Start';
-                }
-            }
-
-            function toggleStart() {
-                if (isRunning) pause();
-                else start();
-            }
-
-            addButtonHandler(startBtn, toggleStart);
-
-            function format(seconds) {
-                seconds = Math.max(0, Math.floor(seconds));
-                const m = Math.floor(seconds / 60);
-                const s = seconds % 60;
-                return `${m}:${String(s).padStart(2, '0')}`;
-            }
-
-            function now() {
-                return Date.now();
-            }
-
-            function remainingSeconds() {
-                if (document.body.classList.contains('solid')) return 0;
-                if (isRunning && deadline) {
-                    return Math.ceil((deadline - now()) / 1000);
-                } else {
-                    return pausedRemaining;
-                }
-            }
-
-            function setRemaining(newSeconds) {
-                newSeconds = Math.max(0, Math.min(36000, newSeconds)); // clamp 0..10h
-                if (isRunning && deadline) {
-                    deadline = now() + newSeconds * 1000;
-                } else {
-                    pausedRemaining = newSeconds;
-                }
-                updateImmediate();
-            }
-
-            function resetTimer() {
-                isRunning = false;
-                deadline = null;
-                pausedRemaining = baseSeconds;
-                updateImmediate();
-            }
-
-            function showToast(msg, ms = 1800) {
-                toastEl.textContent = msg;
-                toastEl.classList.add('show');
-                setTimeout(() => toastEl.classList.remove('show'), ms);
-            }
-
-
-
-            function enterSolid() {
-                document.body.classList.remove('flash');
-                document.body.classList.add('solid');
-                isRunning = false;
-                deadline = null;
-                solidUntil = Date.now() + SOLID_MS;
-            }
-
-            function maybeLeaveSolid() {
-                if (document.body.classList.contains('solid') && Date.now() >= solidUntil) {
-                    document.body.classList.remove('solid');
-                    pausedRemaining = baseSeconds;
-                    isRunning = true;
-                    deadline = Date.now() + pausedRemaining * 1000;
-                }
-            }
-
-            function updateImmediate() {
-                const rem = remainingSeconds();
-                timerEl.textContent = format(rem);
-                if (rem <= 60 && !document.body.classList.contains('solid')) {
-                    timerEl.classList.add('red');
-                    document.body.classList.add('flash');
-                } else {
-                    timerEl.classList.remove('red');
-                    document.body.classList.remove('flash');
-                }
-            }
-
-            function tick() {
-                rafId = requestAnimationFrame(tick);
-                if (document.body.classList.contains('solid')) {
-                    maybeLeaveSolid();
-                    return;
-                }
-                if (isRunning) {
-                    const rem = remainingSeconds();
-                    if (rem <= 0) {
-                        timerEl.textContent = "0:00";
-                        enterSolid();
-                        return;
-                    }
-                }
-                updateImmediate();
-            }
-
-            function addButtonHandler(btn, handler) {
-                let touchHandled = false;
-                btn.addEventListener('touchend', function(e) {
-                    e.preventDefault();
-                    touchHandled = true;
-                    handler();
-                    setTimeout(() => {
-                        touchHandled = false;
-                    }, 350);
-                }, {
-                    passive: false
-                });
-                btn.addEventListener('click', function(e) {
-                    if (touchHandled) return;
-                    handler();
-                });
-            }
-
-            addButtonHandler(upBtn, () => setRemaining(remainingSeconds() + 10));
-            addButtonHandler(downBtn, () => setRemaining(remainingSeconds() - 10));
-
-            addButtonHandler(resetBtn, resetTimer);
-
-            document.addEventListener('visibilitychange', () => {
-                updateImmediate();
-            });
-            window.addEventListener('focus', updateImmediate);
-            window.addEventListener('resize', updateImmediate);
-            window.addEventListener('orientationchange', updateImmediate);
-
-            updateImmediate();
-            cancelAnimationFrame(rafId);
-            tick();
-        })();
-    </script>
+                <button class="btn" id="upBtn" title="Up 10s" aria-label="Up 10 seconds" role="button" tabindex="0">▲ +10s</button> const toastEl = document.getElementById('toast'); const SOLID_MS = 5000; let baseSeconds = 300; // default 5 minutes let
+                isRunning = false; let deadline = null; // timestamp (ms) when countdown hits 0 let pausedRemaining = baseSeconds; let solidUntil = 0; // timestamp (ms) until which solid red is shown let rafId = 0; function start() { if (document.body.classList.contains('solid'))
+                return; // ignore during solid screen if (!isRunning) { const startFrom = remainingSeconds(); deadline = now() + startFrom * 1000; isRunning = true; startBtn.textContent = 'Pause'; } } function pause() { if (isRunning) { pausedRemaining
+                = remainingSeconds(); isRunning = false; deadline = null; startBtn.textContent = 'Start'; } } function toggleStart() { if (isRunning) pause(); else start(); } addButtonHandler(startBtn, toggleStart); function format(seconds) { seconds
+                = Math.max(0, Math.floor(seconds)); const m = Math.floor(seconds / 60); const s = seconds % 60; return `${m}:${String(s).padStart(2, '0')}`; } function now() { return Date.now(); } function remainingSeconds() { if (document.body.classList.contains('solid'))
+                return 0; if (isRunning && deadline) { return Math.ceil((deadline - now()) / 1000); } else { return pausedRemaining; } } function setRemaining(newSeconds) { newSeconds = Math.max(0, Math.min(36000, newSeconds)); // clamp 0..10h if (isRunning
+                && deadline) { deadline = now() + newSeconds * 1000; } else { pausedRemaining = newSeconds; } updateImmediate(); } function resetTimer() { isRunning = false; deadline = null; pausedRemaining = baseSeconds; updateImmediate(); } function
+                showToast(msg, ms = 1800) { toastEl.textContent = msg; toastEl.classList.add('show'); setTimeout(() => toastEl.classList.remove('show'), ms); } function enterSolid() { document.body.classList.remove('flash'); document.body.classList.add('solid');
+                isRunning = false; deadline = null; solidUntil = Date.now() + SOLID_MS; } function maybeLeaveSolid() { if (document.body.classList.contains('solid') && Date.now() >= solidUntil) { document.body.classList.remove('solid'); pausedRemaining
+                = baseSeconds; isRunning = true; deadline = Date.now() + pausedRemaining * 1000; } } function updateImmediate() { const rem = remainingSeconds(); timerEl.textContent = format(rem); if (rem
+                <=6 0 && !document.body.classList.contains(
+                    'solid')) { timerEl.classList.add( 'red'); document.body.classList.add( 'flash'); } else { timerEl.classList.remove( 'red'); document.body.classList.remove( 'flash'); } } function tick() { rafId=r equestAnimationFrame(tick); if (document.body.classList.contains(
+                    'solid')) { maybeLeaveSolid(); return; } if (isRunning) { const rem=r emainingSeconds(); if (rem <=0 ) { timerEl.textContent="0:00" ; enterSolid(); return; } } updateImmediate(); } function addButtonHandler(btn, handler) { let touchHandled=f
+                    alse; btn.addEventListener( 'touchend', function(e) { e.preventDefault(); touchHandled=t rue; handler(); setTimeout(()=> { touchHandled = false; }, 350); }, { passive: false }); btn.addEventListener('click', function(e) { if (touchHandled) return; handler(); }); } addButtonHandler(upBtn, () => setRemaining(remainingSeconds() + 10)); addButtonHandler(downBtn,
+                    () => setRemaining(remainingSeconds() - 10)); addButtonHandler(resetBtn, resetTimer); document.addEventListener('visibilitychange', () => { updateImmediate(); }); window.addEventListener('focus', updateImmediate); window.addEventListener('resize',
+                    updateImmediate); window.addEventListener('orientationchange', updateImmediate); updateImmediate(); cancelAnimationFrame(rafId); tick(); })();
+                    </script>
 </body>
 
 </html>
