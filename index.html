@@ -41,66 +41,8 @@
             width: 100vw;
         }
         
-        .marquee-outer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            overflow: hidden;
-            height: 32px;
-            padding: 0;
-            background: #000;
-            z-index: 1000;
-        }
+
         
-        @keyframes scroll-left {
-            0% {
-                transform: translateX(100vw);
-            }
-            100% {
-                transform: translateX(-100vw);
-            }
-        }
-        
-        .timer-area {
-            flex: 1 1 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            position: relative;
-            height: 100%;
-            overflow: auto;
-        }
-        
-        #timer {
-            font-family: Arial, sans-serif;
-            font-variant-numeric: tabular-nums;
-            font-size: clamp(8vw, 18vmin, 24vw);
-            font-weight: 900;
-            line-height: 1.05;
-            letter-spacing: 1.8vmin;
-            text-align: center;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            color: #fff;
-            background: transparent;
-            /* border-radius removed */
-            padding: 0.08em 0.5em 0.12em 0.5em;
-            box-shadow: none;
-            width: 100%;
-            max-width: 96vw;
-            max-height: 60vh;
-            height: 100%;
-            box-sizing: border-box;
-            display: inline-block;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow: hidden;
-        }
         
         #timer.red {
             color: #ff2b2b;
@@ -219,19 +161,7 @@
     <div id="toast" role="status" aria-live="polite">Browsers don’t allow pages to exit themselves.</div>
 
     <div class="wrap">
-        <div class="marquee-outer" aria-hidden="true">
-            <div class="marquee-track" style="
-                display: inline-block;
-                white-space: nowrap;
-                min-width: 100vw;
-                font-size: 1.2em;
-                color: #fff;
-                letter-spacing: 0.15em;
-                animation: scroll-left 16s linear infinite;
-            ">
-                THE OPEN MICER TIMER &nbsp; • &nbsp; THE OPEN MICER TIMER &nbsp; • &nbsp; THE OPEN MICER TIMER &nbsp; • &nbsp; THE OPEN MICER TIMER &nbsp; • &nbsp; THE OPEN MICER TIMER &nbsp; • &nbsp; THE OPEN MICER TIMER
-            </div>
-        </div>
+
         <main class="timer-area">
             <div id="timer" aria-label="Countdown Timer">5:00</div>
             <div class="controls">
@@ -240,19 +170,6 @@
                 <button class="btn" id="resetBtn" title="Reset Timer" aria-label="Reset Timer" role="button" tabindex="0">Reset</button>
 
                 <button class="btn" id="upBtn" title="Up 10s" aria-label="Up 10 seconds" role="button" tabindex="0">▲ +10s</button>
-            </div>
-        </main>
-    </div>
-    <script>
-        (() => {
-
-
-
-            const timerEl = document.getElementById('timer');
-            const upBtn = document.getElementById('upBtn');
-            const downBtn = document.getElementById('downBtn');
-            const resetBtn = document.getElementById('resetBtn');
-            const startBtn = document.getElementById('startBtn');
             const toastEl = document.getElementById('toast');
 
             const SOLID_MS = 5000;
