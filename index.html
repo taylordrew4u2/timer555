@@ -31,7 +31,7 @@
             display: flex;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
-            font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            font-family: Arial, sans-serif;
         }
         
         .wrap {
@@ -42,18 +42,23 @@
         }
         
         .marquee-outer {
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
             overflow: hidden;
-            height: 20px;
-            padding: 2px 0;
+            height: 32px;
+            padding: 0;
+            background: #000;
+            z-index: 1000;
         }
         
         @keyframes scroll-left {
             0% {
-                transform: translateX(100%);
+                transform: translateX(100vw);
             }
             100% {
-                transform: translateX(-100%);
+                transform: translateX(-100vw);
             }
         }
         
@@ -70,7 +75,7 @@
         }
         
         #timer {
-            font-family: 'Swis721 BlkEx BT', 'Arial Black', Impact, Arial, 'Liberation Sans', 'Nimbus Sans L', 'DejaVu Sans', sans-serif;
+            font-family: Arial, sans-serif;
             font-variant-numeric: tabular-nums;
             font-size: clamp(8vw, 18vmin, 24vw);
             font-weight: 900;
@@ -215,7 +220,17 @@
 
     <div class="wrap">
         <div class="marquee-outer" aria-hidden="true">
-            <div class="marquee-track">THE OPEN MICER TIMER &nbsp; • &nbsp; THE OPEN MICER TIMER &nbsp; • &nbsp; THE OPEN MICER TIMER &nbsp; • &nbsp;</div>
+            <div class="marquee-track" style="
+                display: inline-block;
+                white-space: nowrap;
+                min-width: 100vw;
+                font-size: 1.2em;
+                color: #0ff;
+                letter-spacing: 0.15em;
+                animation: scroll-left 16s linear infinite;
+            ">
+                THE OPEN MICER TIMER &nbsp; • &nbsp; THE OPEN MICER TIMER &nbsp; • &nbsp; THE OPEN MICER TIMER &nbsp; • &nbsp; THE OPEN MICER TIMER &nbsp; • &nbsp; THE OPEN MICER TIMER &nbsp; • &nbsp; THE OPEN MICER TIMER
+            </div>
         </div>
         <main class="timer-area">
             <div id="timer" aria-label="Countdown Timer">5:00</div>
