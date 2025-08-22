@@ -60,6 +60,7 @@
         .timer-area {
             flex: 1 1 auto;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: env(safe-area-inset-top, 0) 0 env(safe-area-inset-bottom, 0) 0;
@@ -105,14 +106,15 @@
         
         .controls {
             display: flex;
-            gap: 6px;
+            flex-direction: row;
+            gap: 16px;
             justify-content: center;
             align-items: center;
-            margin-top: 1.5vmin;
+            margin-top: 2.5vmin;
             margin-bottom: 0;
             padding: 0;
             position: relative;
-            width: 100%;
+            width: auto;
             max-width: 90vw;
         }
         
