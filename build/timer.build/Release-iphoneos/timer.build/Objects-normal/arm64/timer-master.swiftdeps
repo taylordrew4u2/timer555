@@ -1,0 +1,9 @@
+version: "Apple Swift version 6.1.2 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)"
+options: "04c908c76b6edf567740c3797db743f46c920b350c598aed42769d42e0a9a145"
+build_start_time: [1756583439, 50476000]
+build_end_time: [1756583442, 704933000]
+inputs:
+  "/Users/taylordrew/Documents/timer555/build/timer.build/Release-iphoneos/timer.build/DerivedSources/GeneratedAssetSymbols.swift": [1756583438, 975490999]
+  "/Users/taylordrew/Documents/timer555/timer/ContentView.swift": [1756583399, 442971792]
+  "/Users/taylordrew/Documents/timer555/timer/Item.swift": [1756582408, 160524466]
+  "/Users/taylordrew/Documents/timer555/timer/timerApp.swift": [1756583399, 421757312]

@@ -37,20 +37,6 @@
 			);
 			target = BA0679A92E625DBD00E3CCB2 /* timer */;
 		};
-		BA0679DE2E625DD100E3CCB2 /* Exceptions for "timer" folder in "timerTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				TAYLORDREWOPENMIC/index.html,
-			);
-			target = BA0679BA2E625DBE00E3CCB2 /* timerTests */;
-		};
-		BA0679DF2E625DD100E3CCB2 /* Exceptions for "timer" folder in "timerUITests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				TAYLORDREWOPENMIC/index.html,
-			);
-			target = BA0679C42E625DBE00E3CCB2 /* timerUITests */;
-		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -58,8 +44,6 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				BA0679CD2E625DBE00E3CCB2 /* Exceptions for "timer" folder in "timer" target */,
-				BA0679DE2E625DD100E3CCB2 /* Exceptions for "timer" folder in "timerTests" target */,
-				BA0679DF2E625DD100E3CCB2 /* Exceptions for "timer" folder in "timerUITests" target */,
 			);
 			path = timer;
 			sourceTree = "<group>";

@@ -1,0 +1,156 @@
+2025-08-30 20:08:07 +0000 [MT] Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x1257344c0; archive(resolved)="<IDEArchive: 0x6000015818f0>", distributionTask(resolved)="2", distributionDestination(resolved)="1", distributionMethod(resolved)="<IDEDistributionMethodiOSAppStoreDistribution: 0x600003cd6c10>", team(resolved)="<IDEProvisioningBasicTeam: 0x600003fe04c0; teamID='R44WG942GS', teamName='(null)'>">
+	Chain (15, self inclusive):
+	<IDEDistributionProcessingPipelineContext: 0x1257344c0; archive = "<IDEArchive: 0x6000015818f0>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x600003cd6c10>", team="<IDEProvisioningBasicTeam: 0x600003fe04c0; teamID='R44WG942GS', teamName='(null)'>">
+	<IDEDistributionProcessingPipelineContext: 0x125734230; archive = "<IDEArchive: 0x6000015818f0>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x600003cd6c10>", team="<IDEProvisioningBasicTeam: 0x600003fe04c0; teamID='R44WG942GS', teamName='(null)'>">
+	<IDEDistributionContext: 0x125734020; archive = "<IDEArchive: 0x6000015818f0>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x600003cd6c10>", team="<IDEProvisioningBasicTeam: 0x600003fe04c0; teamID='R44WG942GS', teamName='(null)'>">
+	<IDEDistributionContext: 0x12571c630; archive = "<IDEArchive: 0x6000015818f0>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x600003cd6c10>", team="<IDEProvisioningBasicTeam: 0x600003fe04c0; teamID='R44WG942GS', teamName='(null)'>">
+	<IDEDistributionContext: 0x12571c420; archive = "<IDEArchive: 0x6000015818f0>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x600003cd6c10>", team="<IDEProvisioningBasicTeam: 0x600003fe04c0; teamID='R44WG942GS', teamName='(null)'>">
+	<IDEDistributionContext: 0x126206260; archive = "<IDEArchive: 0x6000015818f0>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x600003cd6c10>", team="<IDEProvisioningBasicTeam: 0x600003fe04c0; teamID='R44WG942GS', teamName='(null)'>">
+	<IDEDistributionContext: 0x12571f500; archive = "<IDEArchive: 0x6000015818f0>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x600003cd6c10>", team="<IDEProvisioningBasicTeam: 0x600003fe04c0; teamID='R44WG942GS', teamName='(null)'>">
+	<IDEDistributionContext: 0x15684bfe0; archive = "<IDEArchive: 0x6000015818f0>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x600003cd6c10>", team="<IDEProvisioningBasicTeam: 0x600003fe04c0; teamID='R44WG942GS', teamName='(null)'>">
+	<IDEDistributionContext: 0x12571ebc0; archive = "<IDEArchive: 0x6000015818f0>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x600003cd6c10>", team="<IDEProvisioningBasicTeam: 0x600003fe04c0; teamID='R44WG942GS', teamName='(null)'>">
+	<IDEDistributionContext: 0x125722500; archive = "<IDEArchive: 0x6000015818f0>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x600003cd6c10>", team="<IDEProvisioningBasicTeam: 0x600003fe04c0; teamID='R44WG942GS', teamName='(null)'>">
+	<IDEDistributionContext: 0x15579e8c0; archive = "<IDEArchive: 0x6000015818f0>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x600003cd6c10>", team="<IDEProvisioningBasicTeam: 0x600003fe04c0; teamID='R44WG942GS', teamName='(null)'>">
+	<IDEDistributionContext: 0x12571e3f0; archive = "<IDEArchive: 0x6000015818f0>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x600003cd6c10>", team="<IDEProvisioningBasicTeam: 0x600003fe04c0; teamID='R44WG942GS', teamName='(null)'>">
+	<IDEDistributionContext: 0x1556157c0; archive = "<IDEArchive: 0x6000015818f0>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x600003cd6c10>", team="(null)">
+	<IDEDistributionContext: 0x12570dcc0; archive = "<IDEArchive: 0x6000015818f0>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x600003cd6c10>", team="(null)">
+	<IDEDistributionContext: 0x1569060b0; archive = "<IDEArchive: 0x6000015818f0>", distributionMethod="(null)", team="(null)">
+</IDEDistributionProcessingPipelineContext: 0x1257344c0>
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionCreateDestRootStep
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionCopyItemStep
+2025-08-30 20:08:07 +0000 [MT] Running /usr/bin/ditto '-V' '/Users/taylordrew/Documents/timer555/build/timer.xcarchive/Products/Applications/timer.app' '/var/folders/jn/6fbpwncn1q7gdw00zbt5wdmm0000gn/T/XcodeDistPipeline.~~~jlPXLM/Root/Payload/timer.app'
+2025-08-30 20:08:07 +0000  >>> Copying /Users/taylordrew/Documents/timer555/build/timer.xcarchive/Products/Applications/timer.app 
+2025-08-30 20:08:07 +0000  copying file ./_CodeSignature/CodeResources ... 
+2025-08-30 20:08:07 +0000  3011 bytes for ./_CodeSignature/CodeResources
+2025-08-30 20:08:07 +0000  copying file ./timer.entitlements.backup ... 
+2025-08-30 20:08:07 +0000  534 bytes for ./timer.entitlements.backup
+2025-08-30 20:08:07 +0000  copying file ./AppIcon60x60@2x.png ... 
+2025-08-30 20:08:07 +0000  21527 bytes for ./AppIcon60x60@2x.png
+2025-08-30 20:08:07 +0000  copying file ./timer ... 
+2025-08-30 20:08:07 +0000  186128 bytes for ./timer
+2025-08-30 20:08:07 +0000  copying file ./Assets.car ... 
+2025-08-30 20:08:07 +0000  343935 bytes for ./Assets.car
+2025-08-30 20:08:07 +0000  copying file ./AppIcon76x76@2x~ipad.png ... 
+2025-08-30 20:08:07 +0000  31649 bytes for ./AppIcon76x76@2x~ipad.png
+2025-08-30 20:08:07 +0000  copying file ./embedded.mobileprovision ... 
+2025-08-30 20:08:07 +0000  17369 bytes for ./embedded.mobileprovision
+2025-08-30 20:08:07 +0000  copying file ./Info.plist ... 
+2025-08-30 20:08:07 +0000  1458 bytes for ./Info.plist
+2025-08-30 20:08:07 +0000  copying file ./PkgInfo ... 
+2025-08-30 20:08:07 +0000  8 bytes for ./PkgInfo
+2025-08-30 20:08:07 +0000 [MT] /usr/bin/ditto exited with 0
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionEmbedProfileStep
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionInfoPlistStep
+2025-08-30 20:08:07 +0000 [MT] Skipping setting DTXcodeBuildDistribution because toolsBuildVersionName was nil.
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionItemRemovalStep
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionAppThinningPlistStep
+2025-08-30 20:08:07 +0000 [MT] Skipping step: IDEDistributionAppThinningPlistStep because it said so
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionSymbolsStep
+2025-08-30 20:08:07 +0000 [MT] Writing /var/folders/jn/6fbpwncn1q7gdw00zbt5wdmm0000gn/T/XcodeDistPipeline.~~~jlPXLM/Symbols/19A13114-4825-356A-8800-85BDDFD8E1DE.symbols
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionCopyAppleProvidedContentStep
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionAppThinningStep
+2025-08-30 20:08:07 +0000 [MT] Skipping step: IDEDistributionAppThinningStep because it said so
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionArchThinningStep
+2025-08-30 20:08:07 +0000 [MT] Item /Users/taylordrew/Documents/timer555/build/timer.xcarchive/Products/Applications/timer.app doesn't have the entitlement com.apple.developer.web-browser-engine.host enabled, returning ["arm64e"]
+2025-08-30 20:08:07 +0000 [MT] Archs to thin for item /Users/taylordrew/Documents/timer555/build/timer.xcarchive/Products/Applications/timer.app are ["arm64e"]
+2025-08-30 20:08:07 +0000 [MT] Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/jn/6fbpwncn1q7gdw00zbt5wdmm0000gn/T/XcodeDistPipeline.~~~jlPXLM/Root/Payload/timer.app/timer' '-verify_arch' 'arm64e'
+2025-08-30 20:08:07 +0000 [MT] /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2025-08-30 20:08:07 +0000 [MT] Skipping architecture thinning for item "timer" because arch "arm64e" wasn't found
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionODRStep
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionStripXattrsStep
+2025-08-30 20:08:07 +0000 [MT] Skipping stripping extended attributes because the codesign step will strip them.
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionCodesignStep
+2025-08-30 20:08:07 +0000 [MT] Entitlements for <IDEDistributionItem: 0x600001aea8e0; bundleID='idk.timer', path='<DVTFilePath:0x600001a808a0:'/Users/taylordrew/Documents/timer555/build/timer.xcarchive/Products/Applications/timer.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x600001a01c80; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600000bcc000; name='Apple Development: Taylor Drew (XKC4R3DFQM)', hash='B74EE0C43FEE52BE72DE10458FB9FE78764E6F09', serialNumber='1FD9CC7C668BFF75728C45179D931DFA', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2025-08-30 15:59:47 +0000''>', entitlements='{
+    "application-identifier" = "R44WG942GS.idk.timer";
+    "aps-environment" = development;
+    "com.apple.developer.team-identifier" = R44WG942GS;
+    "get-task-allow" = 1;
+}', teamID='R44WG942GS', identifier='idk.timer', executablePath='<DVTFilePath:0x600001afbd20:'/Users/taylordrew/Documents/timer555/build/timer.xcarchive/Products/Applications/timer.app/timer'>', hardenedRuntime='0'>'>: {
+    "application-identifier" = "R44WG942GS.idk.timer";
+    "aps-environment" = production;
+    "beta-reports-active" = 1;
+    "com.apple.developer.team-identifier" = R44WG942GS;
+    "get-task-allow" = 0;
+}
+2025-08-30 20:08:07 +0000 [MT] Associated App Clip Identifiers Filter: Skipping because "com.apple.developer.associated-appclip-app-identifiers" is not present
+2025-08-30 20:08:07 +0000 [MT] Entitlements for <IDEDistributionItem: 0x600001aea8e0; bundleID='idk.timer', path='<DVTFilePath:0x600001a808a0:'/Users/taylordrew/Documents/timer555/build/timer.xcarchive/Products/Applications/timer.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x600001a01c80; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600000bcc0c0; name='Apple Development: Taylor Drew (XKC4R3DFQM)', hash='B74EE0C43FEE52BE72DE10458FB9FE78764E6F09', serialNumber='1FD9CC7C668BFF75728C45179D931DFA', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2025-08-30 15:59:47 +0000''>', entitlements='{
+    "application-identifier" = "R44WG942GS.idk.timer";
+    "aps-environment" = development;
+    "com.apple.developer.team-identifier" = R44WG942GS;
+    "get-task-allow" = 1;
+}', teamID='R44WG942GS', identifier='idk.timer', executablePath='<DVTFilePath:0x600001afbd20:'/Users/taylordrew/Documents/timer555/build/timer.xcarchive/Products/Applications/timer.app/timer'>', hardenedRuntime='0'>'> are: {
+    "application-identifier" = "R44WG942GS.idk.timer";
+    "aps-environment" = production;
+    "beta-reports-active" = 1;
+    "com.apple.developer.team-identifier" = R44WG942GS;
+    "get-task-allow" = 0;
+}
+2025-08-30 20:08:07 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x600001aea8e0; bundleID='idk.timer', path='<DVTFilePath:0x600001a808a0:'/Users/taylordrew/Documents/timer555/build/timer.xcarchive/Products/Applications/timer.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x600001a01c80; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600000bcc0c0; name='Apple Development: Taylor Drew (XKC4R3DFQM)', hash='B74EE0C43FEE52BE72DE10458FB9FE78764E6F09', serialNumber='1FD9CC7C668BFF75728C45179D931DFA', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2025-08-30 15:59:47 +0000''>', entitlements='{
+    "application-identifier" = "R44WG942GS.idk.timer";
+    "aps-environment" = development;
+    "com.apple.developer.team-identifier" = R44WG942GS;
+    "get-task-allow" = 1;
+}', teamID='R44WG942GS', identifier='idk.timer', executablePath='<DVTFilePath:0x600001afbd20:'/Users/taylordrew/Documents/timer555/build/timer.xcarchive/Products/Applications/timer.app/timer'>', hardenedRuntime='0'>'> to: /var/folders/jn/6fbpwncn1q7gdw00zbt5wdmm0000gn/T/XcodeDistPipeline.~~~jlPXLM/entitlements~~~qw3RV3
+2025-08-30 20:08:07 +0000 [MT] invoking codesign: <NSConcreteTask: 0x600001edacb0; launchPath='/usr/bin/codesign', arguments='(
+    "-f",
+    "-s",
+    C48F3206DDD8D907595FB379BE98BF97F1594942,
+    "--entitlements",
+    "/var/folders/jn/6fbpwncn1q7gdw00zbt5wdmm0000gn/T/XcodeDistPipeline.~~~jlPXLM/entitlements~~~qw3RV3",
+    "--preserve-metadata=identifier,flags,runtime",
+    "--generate-entitlement-der",
+    "--strip-disallowed-xattrs",
+    "-vvv",
+    "/var/folders/jn/6fbpwncn1q7gdw00zbt5wdmm0000gn/T/XcodeDistPipeline.~~~jlPXLM/Root/Payload/timer.app"
+)'>
+2025-08-30 20:08:07 +0000 [MT] codesign output: /var/folders/jn/6fbpwncn1q7gdw00zbt5wdmm0000gn/T/XcodeDistPipeline.~~~jlPXLM/Root/Payload/timer.app: replacing existing signature
+/var/folders/jn/6fbpwncn1q7gdw00zbt5wdmm0000gn/T/XcodeDistPipeline.~~~jlPXLM/Root/Payload/timer.app: signed app bundle with Mach-O thin (arm64) [idk.timer]
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionZipODRItemStep
+2025-08-30 20:08:07 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionCreateIPAStep
+2025-08-30 20:08:07 +0000 [MT] Running /usr/bin/rsync '-8aPhhE' '/var/folders/jn/6fbpwncn1q7gdw00zbt5wdmm0000gn/T/XcodeDistPipeline.~~~jlPXLM/Symbols' '--link-dest' '/var/folders/jn/6fbpwncn1q7gdw00zbt5wdmm0000gn/T/XcodeDistPipeline.~~~jlPXLM' '/var/folders/jn/6fbpwncn1q7gdw00zbt5wdmm0000gn/T/XcodeDistPipeline.~~~jlPXLM/Root'
+2025-08-30 20:08:07 +0000  Symbols/
+._Symbols
+            163 170%    3.17MB/s   00:00:00 (xfer#1, to-check=0/4)
+2025-08-30 20:08:07 +0000  Symbols/19A13114-4825-356A-8800-85BDDFD8E1DE.symbols
+Symbols/._19A13114-4825-356A-8800-85BDDFD8E1DE.symbols
+            163   0%  288.40KB/s   00:00:00 (xfer#2, to-check=2/4)
+2025-08-30 20:08:07 +0000 [MT] /usr/bin/rsync exited with 0
+2025-08-30 20:08:07 +0000 [MT] Running /usr/bin/ditto '-V' '-c' '-k' '--norsrc' '/var/folders/jn/6fbpwncn1q7gdw00zbt5wdmm0000gn/T/XcodeDistPipeline.~~~jlPXLM/Root' '/var/folders/jn/6fbpwncn1q7gdw00zbt5wdmm0000gn/T/XcodeDistPipeline.~~~jlPXLM/Packages/timer.ipa'
+2025-08-30 20:08:07 +0000  >>> Copying /var/folders/jn/6fbpwncn1q7gdw00zbt5wdmm0000gn/T/XcodeDistPipeline.~~~jlPXLM/Root 
+2025-08-30 20:08:07 +0000  copying file ./Payload/timer.app/_CodeSignature/CodeResources ... 
+2025-08-30 20:08:07 +0000  3011 bytes for ./Payload/timer.app/_CodeSignature/CodeResources
+2025-08-30 20:08:07 +0000  copying file ./Payload/timer.app/timer.entitlements.backup ... 
+2025-08-30 20:08:07 +0000  534 bytes for ./Payload/timer.app/timer.entitlements.backup
+2025-08-30 20:08:07 +0000  copying file ./Payload/timer.app/AppIcon60x60@2x.png ... 
+2025-08-30 20:08:07 +0000  21527 bytes for ./Payload/timer.app/AppIcon60x60@2x.png
+2025-08-30 20:08:07 +0000  copying file ./Payload/timer.app/timer ... 
+2025-08-30 20:08:07 +0000  186192 bytes for ./Payload/timer.app/timer
+2025-08-30 20:08:07 +0000  copying file ./Payload/timer.app/Assets.car ... 
+2025-08-30 20:08:07 +0000  343935 bytes for ./Payload/timer.app/Assets.car
+2025-08-30 20:08:07 +0000  copying file ./Payload/timer.app/AppIcon76x76@2x~ipad.png ... 
+2025-08-30 20:08:07 +0000  31649 bytes for ./Payload/timer.app/AppIcon76x76@2x~ipad.png
+2025-08-30 20:08:07 +0000  copying file ./Payload/timer.app/embedded.mobileprovision ... 
+2025-08-30 20:08:07 +0000  19279 bytes for ./Payload/timer.app/embedded.mobileprovision
+2025-08-30 20:08:07 +0000  copying file ./Payload/timer.app/Info.plist ... 
+2025-08-30 20:08:07 +0000  1458 bytes for ./Payload/timer.app/Info.plist
+2025-08-30 20:08:07 +0000  copying file ./Payload/timer.app/PkgInfo ... 
+2025-08-30 20:08:07 +0000  8 bytes for ./Payload/timer.app/PkgInfo
+2025-08-30 20:08:07 +0000  copying file ./Symbols/19A13114-4825-356A-8800-85BDDFD8E1DE.symbols ... 
+2025-08-30 20:08:07 +0000  163076 bytes for ./Symbols/19A13114-4825-356A-8800-85BDDFD8E1DE.symbols
+2025-08-30 20:08:07 +0000 [MT] /usr/bin/ditto exited with 0
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionAppStoreInformationStep
+2025-08-30 20:08:07 +0000 [MT] Skipping step: IDEDistributionAppStoreInformationStep because it said so
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionGenerateProcessedDistributionItems
+2025-08-30 20:08:07 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x600001a25980:'/var/folders/jn/6fbpwncn1q7gdw00zbt5wdmm0000gn/T/XcodeDistPipeline.~~~jlPXLM/Root/Payload/timer.app'>
+2025-08-30 20:08:07 +0000 [MT] Processing step: IDEDistributionCreateManifestStep
+2025-08-30 20:08:07 +0000 [MT] Skipping step: IDEDistributionCreateManifestStep because it said so
