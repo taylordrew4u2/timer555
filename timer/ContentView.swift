@@ -6,8 +6,9 @@ struct ContentView: View {
     @State private var deadline: Date? = nil // when countdown hits 0
     @State private var pausedRemaining = 300
     @State private var solidUntil: Date? = nil // timestamp until which solid red is shown
-    @State private var timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    @State private var timerTick: Int = 0 // Counter to force UI updates
     
+    private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     private let SOLID_MS: TimeInterval = 5.0 // 5 seconds
     
     // Environment values for device detection
@@ -50,7 +51,7 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                                 .padding(.horizontal, adaptiveButtonPadding(for: geometry).horizontal)
                                 .padding(.vertical, adaptiveButtonPadding(for: geometry).vertical)
-                                .frame(minWidth: adaptiveMinButtonSize(for: geometry).width, 
+                                .frame(minWidth: adaptiveMinButtonSize(for: geometry).width,
                                        minHeight: adaptiveMinButtonSize(for: geometry).height)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 6)
@@ -69,7 +70,7 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                                 .padding(.horizontal, adaptiveButtonPadding(for: geometry).horizontal)
                                 .padding(.vertical, adaptiveButtonPadding(for: geometry).vertical)
-                                .frame(minWidth: adaptiveMinButtonSize(for: geometry).width, 
+                                .frame(minWidth: adaptiveMinButtonSize(for: geometry).width,
                                        minHeight: adaptiveMinButtonSize(for: geometry).height)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 6)
@@ -86,7 +87,7 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                                 .padding(.horizontal, adaptiveButtonPadding(for: geometry).horizontal)
                                 .padding(.vertical, adaptiveButtonPadding(for: geometry).vertical)
-                                .frame(minWidth: adaptiveMinButtonSize(for: geometry).width, 
+                                .frame(minWidth: adaptiveMinButtonSize(for: geometry).width,
                                        minHeight: adaptiveMinButtonSize(for: geometry).height)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 6)
@@ -103,7 +104,7 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                                 .padding(.horizontal, adaptiveButtonPadding(for: geometry).horizontal)
                                 .padding(.vertical, adaptiveButtonPadding(for: geometry).vertical)
-                                .frame(minWidth: adaptiveMinButtonSize(for: geometry).width, 
+                                .frame(minWidth: adaptiveMinButtonSize(for: geometry).width,
                                        minHeight: adaptiveMinButtonSize(for: geometry).height)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 6)
@@ -241,6 +242,9 @@ struct ContentView: View {
     // MARK: - Computed Properties
     
     private var remainingSeconds: Int {
+        // Force dependency on currentTime to trigger UI updates
+        _ = timerTick
+        
         if isSolidRed { return 0 }
         if isRunning, let deadline = deadline {
             return max(0, Int(ceil(deadline.timeIntervalSinceNow)))
@@ -349,6 +353,9 @@ struct ContentView: View {
     }
     
     private func tick() {
+        // Update timer tick counter to force UI refresh
+        timerTick += 1
+        
         if isSolidRed {
             maybeLeaveSolid()
             return
