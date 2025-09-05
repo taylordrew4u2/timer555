@@ -146,23 +146,6 @@ struct ContentView: View {
         .onAppear {
             updateImmediate()
         }
-        // Support for Mac keyboard shortcuts and accessibility
-        .onKeyPress(.space) {
-            toggleStart()
-            return .handled
-        }
-        .onKeyPress("r") {
-            resetTimer()
-            return .handled
-        }
-        .onKeyPress(.upArrow) {
-            adjustTime(10)
-            return .handled
-        }
-        .onKeyPress(.downArrow) {
-            adjustTime(-10)
-            return .handled
-        }
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Timer App")
     }
