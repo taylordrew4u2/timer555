@@ -226,11 +226,11 @@
         <main class="timer-area">
             <div id="timer" aria-label="Countdown Timer">5:00</div>
             <div class="controls">
-                <button class="btn" id="downBtn" title="Down 10s" aria-label="Down 10 seconds" role="button" tabindex="0">▼ −10s</button>
-                <button class="btn" id="startBtn" title="Start / Pause" aria-label="Start or Pause Timer" role="button" tabindex="0">Start</button>
-                <button class="btn" id="resetBtn" title="Reset Timer" aria-label="Reset Timer" role="button" tabindex="0">Reset</button>
+                <button class="btn" id="downBtn" title="Down 10s (↓ or -)" aria-label="Down 10 seconds" role="button" tabindex="0">▼ −10s</button>
+                <button class="btn" id="startBtn" title="Start / Pause (Space)" aria-label="Start or Pause Timer" role="button" tabindex="0">Start</button>
+                <button class="btn" id="resetBtn" title="Reset Timer (R)" aria-label="Reset Timer" role="button" tabindex="0">Reset</button>
 
-                <button class="btn" id="upBtn" title="Up 10s" aria-label="Up 10 seconds" role="button" tabindex="0">▲ +10s</button>
+                <button class="btn" id="upBtn" title="Up 10s (↑ or +)" aria-label="Up 10 seconds" role="button" tabindex="0">▲ +10s</button>
             </div>
         </main>
     </div>
@@ -393,6 +393,35 @@
             addButtonHandler(downBtn, () => setRemaining(remainingSeconds() - 10));
 
             addButtonHandler(resetBtn, resetTimer);
+
+            // Keyboard shortcuts for better usability
+            document.addEventListener('keydown', function(e) {
+                // Only handle keys when not typing in an input field
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+                
+                switch(e.code) {
+                    case 'Space':
+                        e.preventDefault();
+                        startBtn.click();
+                        break;
+                    case 'KeyR':
+                        e.preventDefault();
+                        resetBtn.click();
+                        break;
+                    case 'ArrowUp':
+                    case 'Equal': // + key
+                    case 'NumpadAdd':
+                        e.preventDefault();
+                        upBtn.click();
+                        break;
+                    case 'ArrowDown':
+                    case 'Minus': // - key
+                    case 'NumpadSubtract':
+                        e.preventDefault();
+                        downBtn.click();
+                        break;
+                }
+            });
 
             document.addEventListener('visibilitychange', () => {
                 updateImmediate();
