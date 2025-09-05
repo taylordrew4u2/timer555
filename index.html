@@ -153,12 +153,6 @@
             box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
         }
         
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-        
         #flash {
             position: fixed;
             inset: 0;
@@ -358,11 +352,6 @@
                     timerEl.classList.remove('red');
                     document.body.classList.remove('flash');
                 }
-                
-                // Disable up/down buttons when timer is running (but not during solid red)
-                const shouldDisableButtons = isRunning && !document.body.classList.contains('solid');
-                upBtn.disabled = shouldDisableButtons;
-                downBtn.disabled = shouldDisableButtons;
             }
 
             function tick() {
