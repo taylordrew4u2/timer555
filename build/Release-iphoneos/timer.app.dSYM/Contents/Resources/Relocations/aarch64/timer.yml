@@ -1,5 +1,0 @@
----
-triple:          'arm64-apple-darwin'
-binary-path:     '/Users/taylordrew/Documents/timer555/build/Release-iphoneos/timer.app/timer'
-relocations:     []
-...
